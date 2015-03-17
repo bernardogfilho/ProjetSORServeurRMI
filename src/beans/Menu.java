@@ -1,12 +1,23 @@
 package beans;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 
-public class Menu {
+public class Menu implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2788397587018152169L;
 	private int id;
 	private String nom;
 	private Date expiration;
+	private ArrayList<Element> elements;
+	
+	public Menu() {
+		elements = new ArrayList<Element>();
+	}
 	
 	public int getId() {
 		return id;
@@ -31,6 +42,17 @@ public class Menu {
 	public void setExpiration(Date expiration) {
 		this.expiration = expiration;
 	}
+
+	public ArrayList<Element> getElements() {
+		return elements;
+	}
+
+	public void setElements(ArrayList<Element> elements) {
+		this.elements = elements;
+	}
 	
+	public void addElement(Element el) {
+		elements.add(el);
+	}
 	
 }

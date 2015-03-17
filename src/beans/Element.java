@@ -1,13 +1,17 @@
 package beans;
 
-import com.mysql.jdbc.Blob;
+import java.io.Serializable;
 
-public class Element {
+public class Element implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8106701386322618760L;
 	private int id;
 	private String nom;
 	private String type;
-	private Blob image;
+	private java.sql.Blob image;
 	
 	public int getId() {
 		return id;
@@ -27,11 +31,11 @@ public class Element {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Blob getImage() {
+	public java.sql.Blob getImage() {
 		return image;
 	}
-	public void setImage(Blob image) {
-		this.image = image;
+	public void setImage(java.sql.Blob blob) {
+		this.image = blob;
 	}
 	
 	

@@ -3,9 +3,12 @@ package rmi;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import database.MenuDAO;
 import database.UtilisateurDAO;
 
+import beans.Menu;
 import beans.Utilisateur;
 
 public class Database extends UnicastRemoteObject implements DatabaseInterface {
@@ -24,5 +27,18 @@ public class Database extends UnicastRemoteObject implements DatabaseInterface {
 		}
 		return false;	
 	}
+
+	public ArrayList<Menu> getMenus() throws RemoteException {
+		MenuDAO dao = new MenuDAO();
+		try {
+			return dao.findAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 
 }
