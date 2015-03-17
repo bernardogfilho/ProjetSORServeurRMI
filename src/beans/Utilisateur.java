@@ -1,13 +1,19 @@
 package beans;
 
-public class Utilisateur {
+import java.io.Serializable;
+
+public class Utilisateur implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6500245884887397156L;
 	private int id;
 	private String nomUtilisateur;
 	private String motPasse;
 	private boolean estAdmin;
 	
-	public int getId() {
+	public int getId(){
 		return id;
 	}
 	public void setId(int id) {
