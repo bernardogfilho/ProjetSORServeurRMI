@@ -30,8 +30,22 @@ public class MenuDAO extends BaseDonnees{
 		return menus;
 	}
 	
+	public void updateMenu(Menu m) throws SQLException {
+		String sql = "UPDATE menu ";
+		sql += "SET nom = ? ";
+		sql += "expiration = ? ";
+		sql += "WHERE id = ?";
+		open();
+		PreparedStatement ps = co.prepareStatement(sql);
+		ps.setString(1, m.getNom());
+		ps.setDate(2, m.getExpiration());
+		ps.setInt(3, m.getId());
+		ps.executeUpdate();
+		close();
+	}
+	
 	private void addElements(Menu m) throws SQLException {
-		String sql = "SELECT el.nom, el.image, el.type ";
+		String sql = "SELECT el.id, el.nom, el.image, el.type ";
 		sql += "FROM (Menu m ";
 		sql += "LEFT JOIN menus_elements mel ";
 		sql += "ON m.id = mel.menu_id) ";
@@ -43,8 +57,9 @@ public class MenuDAO extends BaseDonnees{
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()) {
 			Element el = new Element();
+            el.setId(rs.getInt("id"));
 			el.setNom(rs.getString("nom"));
-			el.setImage(rs.getBlob("image"));
+			el.setImage(rs.getBytes("image"));
 			el.setType(rs.getString("type"));
 			m.addElement(el);
 		}

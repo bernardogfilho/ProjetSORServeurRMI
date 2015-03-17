@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import database.ElementDAO;
 import database.MenuDAO;
 import database.UtilisateurDAO;
 
@@ -13,6 +14,11 @@ import beans.Utilisateur;
 
 public class Database extends UnicastRemoteObject implements DatabaseInterface {
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	protected Database() throws RemoteException {
 	}
@@ -38,7 +44,11 @@ public class Database extends UnicastRemoteObject implements DatabaseInterface {
 		}
 		return null;
 	}
-	
-	
+
+    public byte[] getImage(String id) throws RemoteException, SQLException {
+        ElementDAO dao = new ElementDAO();
+        return dao.getImage(id);
+    }
+
 
 }

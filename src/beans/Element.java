@@ -2,16 +2,16 @@ package beans;
 
 import java.io.Serializable;
 
-public class Element implements Serializable{
+public class Element implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8106701386322618760L;
+	private static final long serialVersionUID = 2807114773011561552L;
 	private int id;
 	private String nom;
 	private String type;
-	private java.sql.Blob image;
+	private byte[] image;
 	
 	public int getId() {
 		return id;
@@ -31,12 +31,10 @@ public class Element implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
-	public java.sql.Blob getImage() {
-		return image;
-	}
-	public void setImage(java.sql.Blob blob) {
-		this.image = blob;
-	}
-	
-	
+    public byte[] getImage() {
+        return image;
+    }
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 }
