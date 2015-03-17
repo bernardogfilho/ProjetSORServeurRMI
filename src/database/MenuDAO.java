@@ -31,7 +31,7 @@ public class MenuDAO extends BaseDonnees{
 	}
 	
 	private void addElements(Menu m) throws SQLException {
-		String sql = "SELECT el.nom, el.image ";
+		String sql = "SELECT el.nom, el.image, el.type ";
 		sql += "FROM (Menu m ";
 		sql += "LEFT JOIN menus_elements mel ";
 		sql += "ON m.id = mel.menu_id) ";
@@ -45,6 +45,7 @@ public class MenuDAO extends BaseDonnees{
 			Element el = new Element();
 			el.setNom(rs.getString("nom"));
 			el.setImage(rs.getBlob("image"));
+			el.setType(rs.getString("type"));
 			m.addElement(el);
 		}
 	}
