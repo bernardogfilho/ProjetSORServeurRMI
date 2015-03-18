@@ -2,6 +2,7 @@ package rmi;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.sql.SQLException;
@@ -12,7 +13,8 @@ import database.UtilisateurDAO;
 public class DatabaseServeur {
 	
 	public static void main(String[] args) throws RemoteException, MalformedURLException {
-		Database db = new Database();
+//		System.setSecurityManager(new RMISecurityManager());
+        Database db = new Database();
 		UtilisateurDAO dao = new UtilisateurDAO();
 		Utilisateur u = new Utilisateur();
 		u.setMotPasse("123");

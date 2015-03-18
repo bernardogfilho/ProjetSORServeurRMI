@@ -15,5 +15,9 @@ public interface DatabaseInterface extends Remote {
 	public ArrayList<Menu> getMenus() throws RemoteException;
 
     public byte[] getImage(String id) throws RemoteException, SQLException;
+
+    public void createUtilisateur(Utilisateur u) throws RemoteException, SQLException;
+
+    public boolean authentifier(Utilisateur u) throws RemoteException;
 	
 }

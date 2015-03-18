@@ -50,5 +50,19 @@ public class Database extends UnicastRemoteObject implements DatabaseInterface {
         return dao.getImage(id);
     }
 
+    public void createUtilisateur(Utilisateur u) throws RemoteException, SQLException {
+        UtilisateurDAO dao = new UtilisateurDAO();
+        dao.create(u, false);
+    }
+
+    public boolean authentifier(Utilisateur u) throws RemoteException {
+        UtilisateurDAO dao = new UtilisateurDAO();
+        try {
+            return dao.authentifierUtilisateur(u);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }

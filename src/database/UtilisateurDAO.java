@@ -23,17 +23,22 @@ public class UtilisateurDAO extends BaseDonnees {
 		close();
 	}
 	
-	public boolean authentifierUtilisateur(Utilisateur utilisateur) throws SQLException {
-		String sql = null;
+	public boolean authentifierUtilisateur(Utilisateur utilisateur) {
+		String sql = "";
 		sql += "SELECT * FROM utilisateur WHERE ";
 		sql += "username=? AND ";
 		sql += "motPasse=?";
 		open();
-		PreparedStatement ps = co.prepareStatement(sql);
-		ps.setString(1,  utilisateur.getNomUtilisateur());
-		ps.setString(2, utilisateur.getMotPasse());
-		ResultSet rs = ps.executeQuery();
-		return rs.next();
+        try {
+            PreparedStatement ps = co.prepareStatement(sql);
+            ps.setString(1,  utilisateur.getNomUtilisateur());
+            ps.setString(2, utilisateur.getMotPasse());
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
 	}
 	
 	public boolean authentifierAdmin(Utilisateur utilisateur) throws SQLException {
