@@ -13,6 +13,8 @@ public interface DatabaseInterface extends Remote {
 
 	public boolean authentifierAdmin(Utilisateur utilisateur) throws RemoteException;
 
+	public void createMenu(Menu m) throws RemoteException;
+	
 	public ArrayList<Menu> getMenus() throws RemoteException;
 
     public byte[] getImage(String id) throws RemoteException, SQLException;
@@ -24,4 +26,6 @@ public interface DatabaseInterface extends Remote {
     public void createElement(Element e) throws RemoteException;
 	
     public void destroyElement(int id) throws RemoteException;
+    
+    public ArrayList<Element> findElementByType(String type) throws RemoteException;
 }

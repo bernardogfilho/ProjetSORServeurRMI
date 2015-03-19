@@ -84,4 +84,25 @@ public class Database extends UnicastRemoteObject implements DatabaseInterface {
 		}
 	}
 
+	public ArrayList<Element> findElementByType(String type)
+			throws RemoteException {
+		ElementDAO dao = new ElementDAO();
+		try {
+			return dao.findByType(type);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void createMenu(Menu m) throws RemoteException {
+		MenuDAO dao = new MenuDAO();
+		try {
+			dao.createMenu(m);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 }

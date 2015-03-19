@@ -30,6 +30,31 @@ public class MenuDAO extends BaseDonnees{
 		return menus;
 	}
 	
+	public void createMenu(Menu m) throws SQLException {
+		String sql = "INSERT INTO menu ";
+		sql += "(nom, expiration)";
+		sql += "VALUES (?, ?)";
+		open();
+		PreparedStatement ps = co.prepareStatement(sql);
+		ps.setString(1, m.getNom());
+		ps.setDate(2, m.getExpiration());
+		System.out.println("CREATING MENU... " + ps);
+		ps.executeUpdate();
+		for (Element element : m.getElements()) {
+			sql = "SELECT id FROM element WHERE nom=?";
+			PreparedStatement ps2 = co.prepareStatement(sql);
+			ps2.setString(1, element.getNom());
+			ResultSet rs = ps2.executeQuery();
+			rs.next();
+			int id = rs.getInt("id");
+			sql = "INSERT INTO menus_elements (menu_id, element_id) VALUES (LAST_INSERT_ID(),?)";
+			PreparedStatement ps3 = co.prepareStatement(sql);
+			ps3.setInt(1,id);
+			ps3.executeUpdate();
+		}
+		close();
+	}
+	
 	public void updateMenu(Menu m) throws SQLException {
 		String sql = "UPDATE menu ";
 		sql += "SET nom = ? ";

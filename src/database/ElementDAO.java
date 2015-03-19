@@ -49,6 +49,23 @@ public class ElementDAO extends BaseDonnees {
         close();
         return elements;
 	}
+	
+	public ArrayList<Element> findByType(String type) throws SQLException {
+		String sql =  "SELECT nom, id FROM element WHERE type=?";
+		open();
+		PreparedStatement ps = co.prepareStatement(sql);
+		ps.setString(1, type);
+		System.out.println("FIND BY TYPE: " + ps);
+		ResultSet rs = ps.executeQuery();
+		ArrayList<Element> elements = new ArrayList<Element>();
+		while(rs.next()) {
+			Element e = new Element();
+			e.setId(rs.getInt("id"));
+			e.setNom(rs.getString("nom"));
+			elements.add(e);
+		}
+		return elements;
+	}
 
     public byte[] getImage(String id) throws SQLException {
         String sql = "SELECT image FROM element WHERE id=?";
