@@ -9,6 +9,7 @@ import database.ElementDAO;
 import database.MenuDAO;
 import database.UtilisateurDAO;
 
+import beans.Element;
 import beans.Menu;
 import beans.Utilisateur;
 
@@ -64,5 +65,23 @@ public class Database extends UnicastRemoteObject implements DatabaseInterface {
             return false;
         }
     }
+
+	public void createElement(Element e) throws RemoteException {
+		ElementDAO dao = new ElementDAO();
+		try {
+			dao.create(e);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	public void destroyElement(int id) throws RemoteException {
+		ElementDAO dao = new ElementDAO();
+		try {
+			dao.destroy(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

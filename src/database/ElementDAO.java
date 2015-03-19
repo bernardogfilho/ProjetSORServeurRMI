@@ -9,6 +9,29 @@ import beans.Element;
 
 public class ElementDAO extends BaseDonnees {
 	
+	public void create(Element e) throws SQLException{
+		String sql = "INSERT INTO element ";
+		sql += "(nom, type, image) ";
+		sql += "VALUES (?, ?, ?)";
+		open();
+		PreparedStatement ps = co.prepareStatement(sql);
+		System.out.println("CREATING ELEMENT... " + ps);
+		ps.setString(1, e.getNom());
+		ps.setString(2, e.getType());
+		ps.setBytes(3, e.getImage());
+		ps.executeUpdate();
+		ps.close();
+	}
+	
+	public void destroy(int id) throws SQLException {
+		String sql = "DELETE FROM element WHERE id=?";
+		open();
+		PreparedStatement ps = co.prepareStatement(sql);
+		ps.setInt(1, id);
+		ps.executeUpdate();
+		close();
+	}
+	
 	public ArrayList<Element> findAll() throws SQLException {
 	    ArrayList<Element> elements = new ArrayList<Element>();
         String sql = "";

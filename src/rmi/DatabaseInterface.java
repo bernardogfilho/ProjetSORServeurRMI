@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import beans.Element;
 import beans.Menu;
 import beans.Utilisateur;
 
@@ -19,5 +20,8 @@ public interface DatabaseInterface extends Remote {
     public void createUtilisateur(Utilisateur u) throws RemoteException, SQLException;
 
     public boolean authentifier(Utilisateur u) throws RemoteException;
+    
+    public void createElement(Element e) throws RemoteException;
 	
+    public void destroyElement(int id) throws RemoteException;
 }
